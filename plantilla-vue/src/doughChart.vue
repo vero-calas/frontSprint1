@@ -67,7 +67,7 @@ export default {
   }),
   created() {
     console.log("estoy creando");
-    this.$http.get("http://localhost:8081/club").then(response => {
+    this.$http.get("http://159.65.128.52:8080/TBD-G7/club").then(response => {
       this.clubs = response.data;
       console.log("club:" + this.clubs);
       this.crearGrafico();
@@ -96,13 +96,13 @@ export default {
           {
             label: "Component 1",
             backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
-            data: [10, 20, 30, 10, 20, 30, 10, 20, 30, 10]
+            data: []
           },
 
           {
             label: "Component 2",
             backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
-            data: [20, 30, 40, 10, 20, 30, 10, 20, 30, 9]
+            data: []
           }
         ]
       };
@@ -110,13 +110,18 @@ export default {
     
 
       console.log("el tamaño es :" + this.clubs.length);
-      for (let i = 0; i < this.clubs.length; i++) {
+      for (let i = 0; i < this.clubs.length-1; i++) {
         this.chartData.labels = this.chartData.labels.concat([
           this.clubs[i].name
+         
         ]);
+        this.chartData.datasets[0].data.push( this.clubs[i].statistics[0].positive_value) 
+        this.chartData.datasets[1].data.push( this.clubs[i].statistics[0].positive_value) 
       }
       
       console.log("char:" + this.chartData.labels);
+       console.log("char2:" +  this.chartData.datasets[0].data);
+        console.log("char3:" +  this.chartData.datasets[1].data);
      
     }
   }
