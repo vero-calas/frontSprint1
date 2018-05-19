@@ -2,7 +2,7 @@
 <div>
     <br>
 
-    <label>Gráfico general de comentarios positivos y negativos:</label>
+    <label>Gráfico general de todos los club:</label>
     <br><br>
     <hr>
     <br><br>

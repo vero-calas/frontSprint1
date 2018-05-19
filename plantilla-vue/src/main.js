@@ -7,7 +7,6 @@ import addMovie from  './addMovie.vue';
 import viewMovies from './viewMovies.vue';
 import FilmWithActor from  './FilmWithActor.vue';
 import ActorWithFilm from './ActorWithFilm.vue';
-import trofeos from './trofeos.vue';
 import VueResource from 'vue-resource';
 import VueChart from 'vue-chart-js'
 Vue.use(VueChart)
@@ -23,8 +22,7 @@ const routes = [
     { path: '/viewMovies', component: viewMovies},
     { path: '/addMovie', component: addMovie},
     { path: '/FilmWithActor', component: FilmWithActor},
-    { path: '/ActorWithFilm', component: ActorWithFilm},
-    { path: '/trofeos', component: trofeos}
+    { path: '/ActorWithFilm', component: ActorWithFilm}
 ]
 
 // Create the router instance and pass the `routes` option

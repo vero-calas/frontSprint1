@@ -11,7 +11,6 @@
         <a href="#/doughChart">Grafico General</a>
         <a href="#/">Gráfico Barras</a>
         <a href="#/viewMovies">Gráfico Líneas</a>
-        <a href="#/trofeos">Gráfico de trofeos</a>
       </nav>
     </header>
 
