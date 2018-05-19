@@ -104,12 +104,16 @@ export default {
         labels: [],
         datasets: [
           {
-            label: "Component 1",
+            label: "Comentarios positivos",
             backgroundColor: this.colores,
             data: []
           },
 
-
+            {
+                label: "Comentarios negativos",
+                backgroundColor: this.colores,
+                data: []
+            },
         ]
       };
      /* console.log("char data es " + this.chartData);
@@ -124,7 +128,7 @@ export default {
          
         ]);
         this.chartData.datasets[0].data.push( this.clubs[i].statistics[0].positive_value) 
-      /*  this.chartData.datasets[1].data.push( this.clubs[i].statistics[0].positive_value) */
+        this.chartData.datasets[1].data.push( this.clubs[i].statistics[0].negative_value)
       }
       /*
       console.log("char:" + this.chartData.labels);
