@@ -21,7 +21,7 @@
    </div>
 
     <div style="width:50%; float:right;">
-        <vue-chart v-if="this.chartData !== null" type="doughnut" :data="chartData"></vue-chart>
+        <vue-chart v-if="this.tortaData !== null" type="pie" :data="this.tortaData"></vue-chart>
          <div v-else>
              <div class="lds-css  ng-scope">
                  <div style="width:100%;height:100%" class="lds-bars">
@@ -60,6 +60,7 @@ export default {
 
   data: () => ({
     chartData: null,
+    tortaData: null,
     barra:true,
     torta:false,
     clubs: [],
@@ -72,7 +73,8 @@ export default {
       this.clubs = response.data;
       console.log("club:" + this.clubs);
       this.crearGrafico();
-      console.log("grafico creado");
+      this.crearTorta();
+      console.log("grafico creado", this.chartData);
 
      
     });
@@ -90,12 +92,39 @@ export default {
 
     },
 
+ /*---------------------------------------------------------------------------------------------------------*/
+/*dejar esta funcion en el for de crear grafico*/
       colorRandom(){
         var color="#"+((1<<24)*Math.random()|0).toString(16)
-
-            this.colores.push(color)
+       /* for(let i = 0; i < this.colores.length-1; i++)
+            if (color.localeCompare(this.colores[i]) == 0){
+                console.log("econtre un color igual")
+                colorRandom();
+            }
+            else{
+                this.colores.push(color)
+            }*/
+          this.colores.push(color)
               console.log("color", color, "agregado")
+          console.log("el arreglo de colores es:", this.colores)
 
+      },
+
+      /*---------------------------------------------------------------------------------------------------------*/
+
+      crearTorta(){
+          this.tortaData = {
+              labels: ["Promedio de comentarios positivos","Promedio de comentarios negativos"],
+              datasets: [
+                  {
+                      label: ["Promedio de comentarios positivos","Promedio de comentarios negativos"],
+                      backgroundColor: ["#56FB4C", "#FB5C57"],
+                      data: [this.clubs[16].statistics[0].positive_value, this.clubs[16].statistics[0].negative_value]
+                  },
+
+              ]
+
+          }
       },
 
     crearGrafico() {
@@ -105,13 +134,13 @@ export default {
         datasets: [
           {
             label: "Comentarios positivos",
-            backgroundColor: this.colores,
+            backgroundColor: "#56FB4C",
             data: []
           },
 
             {
                 label: "Comentarios negativos",
-                backgroundColor: this.colores,
+                backgroundColor: "#FB5C57",
                 data: []
             },
         ]
@@ -121,8 +150,9 @@ export default {
 
       console.log("el tamaño es :" + this.clubs.length);*/
       for (let i = 0; i < this.clubs.length-1; i++) {
-        console.log("arreglo de colores:", this.colores)
-          this.colorRandom();
+
+          console.log("el data usado es",this.clubs[16].statistics[0].positive_value)
+         /* this.colorRandom();*/
         this.chartData.labels = this.chartData.labels.concat([
           this.clubs[i].name
          
