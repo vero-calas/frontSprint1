@@ -6,14 +6,32 @@
     <br><br>
     <hr>
     <br><br>
-    <div style="width:50%; float: left;">
-        <vue-chart type="bar" :data="chartData"></vue-chart>
+   
+    <div style="width:50%; float: left;"  >
+        
+        <vue-chart  v-if="this.chartData !== null" type="bar" :data="this.chartData"></vue-chart>
+            <div v-else>
+             <div class=" lds-css ng-scope">
+                 <div style="width:100%;height:100%" class="lds-bars">
+                   <div></div><div></div><div></div><div></div> <div></div>
+                </div>
+              </div>
+            </div> 
+    
+   </div>
+
+    <div style="width:50%; float:right;">
+        <vue-chart v-if="this.chartData !== null" type="doughnut" :data="chartData"></vue-chart>
+         <div v-else>
+             <div class="lds-css  ng-scope">
+                 <div style="width:100%;height:100%" class="lds-bars">
+                   <div></div><div></div><div></div><div></div> <div></div> 
+                </div>
+              </div>
+            </div>      
     </div>
 
-    <div style="width:50%; float:right">
-        <vue-chart type="doughnut" :data="chartData"></vue-chart>
-    </div>
-
+   
     <div>
         <h1>Descripción:</h1>
 
@@ -31,39 +49,79 @@
 
 
 <script>
+import VueChart from "vue-chart-js";
 
-    import VueChart from 'vue-chart-js'
+export default {
+  name: "App",
 
-    export default {
-        name: 'App',
+  components: {
+    VueChart
+  },
 
-        components: {
-            VueChart
-        },
+  data: () => ({
+    chartData: null,
+    barra:true,
+    torta:false,
+    clubs: [],
+    
+  }),
+  created() {
+    console.log("estoy creando");
+    this.$http.get("http://localhost:8081/club").then(response => {
+      this.clubs = response.data;
+      console.log("club:" + this.clubs);
+      this.crearGrafico();
+      console.log("grafico creado");
 
-        data: () => ({
-        chartData: {
-            labels: ['U de Chile', 'Colo-Colo', 'U Católica'],
-            datasets: [
-                {
-                    label: 'Component 1',
-                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                    data: [10, 20, 30]
-                },
+     
+    });
+  },
+  
+  methods: {
+    mostrarBarra(){
+        this.barra=true;
+        this.torta=false;    
 
-                {
-                    label: 'Component 2',
-                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
-                    data: [20, 30, 40]
-                }
-            ]
-        }
-    }),
+    },
+     mostrarTorta(){
+        this.barra=false;
+        this.torta=true;    
 
+    },
+    crearGrafico() {
+  
+      this.chartData = {
+        labels: [],
+        datasets: [
+          {
+            label: "Component 1",
+            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+            data: [10, 20, 30, 10, 20, 30, 10, 20, 30, 10]
+          },
+
+          {
+            label: "Component 2",
+            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+            data: [20, 30, 40, 10, 20, 30, 10, 20, 30, 9]
+          }
+        ]
+      };
+      console.log("char data es " + this.chartData);
+    
+
+      console.log("el tamaño es :" + this.clubs.length);
+      for (let i = 0; i < this.clubs.length; i++) {
+        this.chartData.labels = this.chartData.labels.concat([
+          this.clubs[i].name
+        ]);
+      }
+      
+      console.log("char:" + this.chartData.labels);
+     
     }
+  }
+};
 </script>
 
 <style scoped>
-
-
 </style>
