@@ -2,14 +2,14 @@
 <div>
     <br>
 
-    <label>Gráficos de ..... :</label>
+    <label>Gráfico general de todos los club:</label>
     <br><br>
     <hr>
     <br><br>
    
-    <div style="width:50%; float: left;"  >
+    <div style="width:100%; float: left;"  >
         
-        <vue-chart  v-if="this.chartData !== null" type="bar" :data="this.chartData"></vue-chart>
+        <vue-chart  v-if="this.chartData !== null" type="horizontalBar" :data="this.chartData"></vue-chart>
             <div v-else>
              <div class=" lds-css ng-scope">
                  <div style="width:100%;height:100%" class="lds-bars">
@@ -63,6 +63,7 @@ export default {
     barra:true,
     torta:false,
     clubs: [],
+    colores: []
     
   }),
   created() {
@@ -88,40 +89,47 @@ export default {
         this.torta=true;    
 
     },
+
+      colorRandom(){
+        var color="#"+((1<<24)*Math.random()|0).toString(16)
+
+            this.colores.push(color)
+              console.log("color", color, "agregado")
+
+      },
+
     crearGrafico() {
-  
+
       this.chartData = {
         labels: [],
         datasets: [
           {
             label: "Component 1",
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+            backgroundColor: this.colores,
             data: []
           },
 
-          {
-            label: "Component 2",
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
-            data: []
-          }
+
         ]
       };
-      console.log("char data es " + this.chartData);
+     /* console.log("char data es " + this.chartData);
     
 
-      console.log("el tamaño es :" + this.clubs.length);
+      console.log("el tamaño es :" + this.clubs.length);*/
       for (let i = 0; i < this.clubs.length-1; i++) {
+        console.log("arreglo de colores:", this.colores)
+          this.colorRandom();
         this.chartData.labels = this.chartData.labels.concat([
           this.clubs[i].name
          
         ]);
         this.chartData.datasets[0].data.push( this.clubs[i].statistics[0].positive_value) 
-        this.chartData.datasets[1].data.push( this.clubs[i].statistics[0].positive_value) 
+      /*  this.chartData.datasets[1].data.push( this.clubs[i].statistics[0].positive_value) */
       }
-      
+      /*
       console.log("char:" + this.chartData.labels);
        console.log("char2:" +  this.chartData.datasets[0].data);
-        console.log("char3:" +  this.chartData.datasets[1].data);
+        console.log("char3:" +  this.chartData.datasets[1].data);*/
      
     }
   }
