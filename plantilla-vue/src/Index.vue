@@ -95,9 +95,8 @@
         }
     ,
         timeConverter(timestamp){
-            var ent = parseInt(timestamp)
-            var num = ent / 1000
-            var a = new Date(num);
+            var ent = parseInt(timestamp);
+            var a = new Date(ent);
             var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
             var year = a.getFullYear();
             var month = months[a.getMonth()];
@@ -106,7 +105,8 @@
             var min = a.getMinutes();
             var sec = a.getSeconds();
             var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-            console.log("el tiempo que va a salir es; ", a.getFullYear(timestamp))
+            console.log("el tiempo que va a salir es; ", time);
+            return (time);
 
         },
 
@@ -139,11 +139,11 @@
 
             console.log("el timestamp cambiado es: ", this.timeConverter(this.clubs[2].statistics[tam - 1].lastUpdate))
             /*Primer elemento de fecha*/
-            this.chartData.labels.push(this.clubs[2].statistics[0].lastUpdate)
+            this.chartData.labels.push(this.timeConverter(this.clubs[2].statistics[0].lastUpdate))
             /*Segundo elemento intermedio de fecha*/
-            this.chartData.labels.push(this.clubs[2].statistics[Math.trunc(tam / 2)].lastUpdate)
+            this.chartData.labels.push(this.timeConverter(this.clubs[2].statistics[Math.trunc(tam / 2)].lastUpdate))
             /*Ultima fecha*/
-            this.chartData.labels.push(this.clubs[2].statistics[tam - 1].lastUpdate)
+            this.chartData.labels.push(this.timeConverter(this.clubs[2].statistics[tam - 1].lastUpdate))
             /**Comentarios positivos/
              /*Primer elemento de fecha*/
             this.chartData.datasets[0].data.push(this.clubs[2].statistics[0].positive_value)

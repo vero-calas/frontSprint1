@@ -97,6 +97,22 @@
         }
     ,
 
+        timeConverter(timestamp){
+            var ent = parseInt(timestamp);
+            var a = new Date(ent);
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var year = a.getFullYear();
+            var month = months[a.getMonth()];
+            var date = a.getDate();
+            var hour = a.getHours();
+            var min = a.getMinutes();
+            var sec = a.getSeconds();
+            var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+            console.log("el tiempo que va a salir es; ", time);
+            return (time);
+
+        },
+
         crearGrafico()
         {
 
@@ -117,11 +133,11 @@
             var tam = this.clubs[2].statistics.length
             console.log("estoy trabjando con el club:", this.clubs[2].name)
             /*Primer elemento de fecha*/
-            this.chartData.labels.push(this.clubs[2].statistics[0].lastUpdate)
+            this.chartData.labels.push(this.timeConverter(this.clubs[2].statistics[0].lastUpdate))
             /*Segundo elemento intermedio de fecha*/
-            this.chartData.labels.push(this.clubs[2].statistics[Math.trunc(tam / 2)].lastUpdate)
+            this.chartData.labels.push(this.timeConverter(this.clubs[2].statistics[Math.trunc(tam / 2)].lastUpdate))
             /*Ultima fecha*/
-            this.chartData.labels.push(this.clubs[2].statistics[tam - 1].lastUpdate)
+            this.chartData.labels.push(this.timeConverter(this.clubs[2].statistics[tam - 1].lastUpdate))
             console.log("Los datos obtenidos son:", this.chartData.labels)
 
             /**Comentarios positivos/
@@ -154,11 +170,11 @@
             var tam = this.clubs[2].statistics.length
             console.log("estoy trabjando con el club:", this.clubs[2].name)
             /*Primer elemento de fecha*/
-            this.fantasmaData.labels.push(this.clubs[16].statistics[0].lastUpdate)
+            this.fantasmaData.labels.push(this.timeConverter(this.clubs[16].statistics[0].lastUpdate))
             /*Segundo elemento intermedio de fecha*/
-            this.fantasmaData.labels.push(this.clubs[16].statistics[Math.trunc(tam / 2)].lastUpdate)
+            this.fantasmaData.labels.push(this.timeConverter(this.clubs[16].statistics[Math.trunc(tam / 2)].lastUpdate))
             /*Ultima fecha*/
-            this.fantasmaData.labels.push(this.clubs[16].statistics[tam - 1].lastUpdate)
+            this.fantasmaData.labels.push(this.timeConverter(this.clubs[16].statistics[tam - 1].lastUpdate))
             console.log("Los datos obtenidos son:", this.chartData.labels)
 
             /**Comentarios positivos/
