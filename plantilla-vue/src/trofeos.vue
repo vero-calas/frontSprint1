@@ -93,9 +93,10 @@
         /*---------------------------------------------------------------------------------------------------------*/
         /*dejar esta funcion en el for de crear grafico*/
         colorRandom(){
-            this.colores[0] = "#"+((1<<24)*Math.random()|0).toString(16)
-              for(let i = 0; i < this.colores.length-1; i++)
-                  var color="#"+((1<<24)*Math.random()|0).toString(16)
+            var color = "#"+((1<<24)*Math.random()|0).toString(16)
+
+          /*    for(let i = 0; i < this.colores.length-1; i++)
+                  var color = "#"+((1<<24)*Math.random()|0).toString(16)
                   var n = color.localeCompare(this.colores[i]);
             console.log("")
                  if (n == 0){
@@ -104,7 +105,7 @@
                  }
                  else{
                      this.colores.push(color)
-                 }
+                 }*/
             this.colores.push(color)
             console.log("color", color, "agregado")
             console.log("el arreglo de colores es:", this.colores)

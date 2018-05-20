@@ -157,7 +157,7 @@ export default {
           this.clubs[i].name
          
         ]);
-        let tam =this.clubs[i].statistics.length
+        let tam = this.clubs[i].statistics.length
         this.chartData.datasets[0].data.push( this.clubs[i].statistics[tam-1].positive_value) 
         this.chartData.datasets[1].data.push( this.clubs[i].statistics[tam-1].negative_value)
       }
