@@ -5,8 +5,10 @@ $secondary-color: #50e2da;
  */
 /*URL */
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
-
+@import url('../node_modules/vue-material/dist/vue-material.min.css');
+@import url('../node_modules/vue-material/dist/theme/default.css');
+@import url('../node_modules/vue-material/src/components/MdList/theme.scss');
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 /*Alert message*/
 isa_info, .isa_success, .isa_warning, .isa_error {
   margin: 8px 0px;
